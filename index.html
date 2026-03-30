@@ -2,29 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>File Converter PRO</title>
+<title>File Converter Pro</title>
 <link rel="stylesheet" href="style.css">
-
 <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/ffmpeg.min.js"></script>
 </head>
-
 <body>
 
-<h1 class="title">⚡ File Converter PRO</h1>
+<h1>⚡ File Converter PRO</h1>
 
 <div class="card">
     <input type="file" id="fileInput">
-    <button onclick="handleFile()">Convert & Generate Link</button>
+    <textarea id="textInput" placeholder="Optional text (1–10000 chars)"></textarea>
+    <button onclick="convertFile()">Convert & Generate Link</button>
 </div>
 
 <div id="result"></div>
 
-<div class="card destroy">
-    <input type="text" id="destroyCode" placeholder="Enter code to destroy">
-    <button onclick="destroyLink()">💀 Destroy Link</button>
+<div class="card">
+    <h2>🔍 Open Link</h2>
+    <input type="text" id="linkInput" placeholder="Enter 10-char code">
+    <button onclick="openLink()">Open</button>
 </div>
 
-<script src="storage.js"></script>
+<div class="card">
+    <h2>💀 Destroy Link</h2>
+    <input type="text" id="destroyInput" placeholder="Enter code to destroy">
+    <button onclick="destroyLink()">Destroy</button>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
