@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Universal File Converter</title>
+<style>
+    body {
+        font-family: Arial;
+        background: #0f172a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+    .box {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px auto;
+        max-width: 500px;
+    }
+    input {
+        margin: 10px;
+    }
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        background: #38bdf8;
+        color: black;
+        cursor: pointer;
+    }
+    img, video, audio {
+        margin-top: 15px;
+        max-width: 100%;
+    }
+    a {
+        color: #22c55e;
+        display: block;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+
+<h1>🔥 HTML File Converter Lab</h1>
+
+<div class="box">
+    <h2>🖼️ Image → PNG</h2>
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="convertImage()">Convert</button>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <div id="imageResult"></div>
+</div>
+
+<div class="box">
+    <h2>🎵 Audio → MP3</h2>
+    <input type="file" id="audioInput" accept="audio/*">
+    <button onclick="convertAudio()">Convert</button>
+    <div id="audioResult"></div>
+</div>
+
+<div class="box">
+    <h2>🎬 Video → MP4</h2>
+    <input type="file" id="videoInput" accept="video/*">
+    <button onclick="convertVideo()">Convert</button>
+    <div id="videoResult"></div>
+</div>
+
+<script>
+function convertImage() {
+    const file = document.getElementById("imageInput").files[0];
+    if (!file) return;
+
+    const img = new Image();
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        const pngUrl = canvas.toDataURL("image/png");
+
+        document.getElementById("imageResult").innerHTML = `
+            <img src="${pngUrl}">
+            <a href="${pngUrl}" download="converted.png">Download PNG</a>
+        `;
+    };
+
+    img.src = URL.createObjectURL(file);
+}
+
+function convertAudio() {
+    const file = document.getElementById("audioInput").files[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+
+    document.getElementById("audioResult").innerHTML = `
+        <audio controls src="${url}"></audio>
+        <a href="${url}" download="converted.mp3">Download MP3</a>
+    `;
+}
+
+function convertVideo() {
+    const file = document.getElementById("videoInput").files[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+
+    document.getElementById("videoResult").innerHTML = `
+        <video controls src="${url}"></video>
+        <a href="${url}" download="converted.mp4">Download MP4</a>
+    `;
+}
+</script>
+
+</body>
+</html>
